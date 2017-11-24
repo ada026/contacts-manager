@@ -14,7 +14,7 @@ public class GeekUI {
     }
 
     public void askForContactInformation() throws InvalidEmailException, InvalidContactNameException {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = createScanner();
         String name = scanner.nextLine();
         String email = scanner.nextLine();
         String phoneNumber = scanner.nextLine();
@@ -22,12 +22,16 @@ public class GeekUI {
     }
 
     public void askForNameToSearch() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = createScanner();
         String pattern = scanner.nextLine();
         contactsManager.searchContactByName(pattern);
     }
 
     public void printAllContacts() {
         contactsManager.printAllContacts();
+    }
+
+    private static Scanner createScanner() {
+        return new Scanner(System.in);
     }
 }
