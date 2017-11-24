@@ -1,8 +1,6 @@
 package com.fredericboisguerin.insa.core;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -39,7 +37,8 @@ public class ContactsManagerMust {
 
         contactsManager.printAllContacts();
 
-        assertThat(standardOutput(), containsString(NICOLE_FERRONI_NAME));
+        assertThat(standardOutput()).contains(NICOLE_FERRONI_NAME);
+
     }
 
     @Test
@@ -51,7 +50,7 @@ public class ContactsManagerMust {
         contactsManager.printAllContacts();
 
         String expectedOutput = NICOLE_FERRONI_NAME + FIELD_SEPARATOR + NICOLE_FERRONI_PHONE_NUMBER;
-        assertThat(standardOutput(), containsString(expectedOutput));
+        assertThat(standardOutput()).contains(expectedOutput);
     }
 
     @Test
@@ -63,7 +62,8 @@ public class ContactsManagerMust {
         contactsManager.printAllContacts();
 
         String expectedOutput = NICOLE_FERRONI_NAME + FIELD_SEPARATOR + NICOLE_FERRONI_EMAIL;
-        assertThat(standardOutput(), containsString(expectedOutput));
+        assertThat(standardOutput()).contains(expectedOutput);
+
     }
 
     @Test
@@ -74,7 +74,8 @@ public class ContactsManagerMust {
         contactsManager.printAllContacts();
 
         String expectedOutput = NICOLE_FERRONI_NAME + FIELD_SEPARATOR + NICOLE_FERRONI_EMAIL + FIELD_SEPARATOR + NICOLE_FERRONI_PHONE_NUMBER;
-        assertThat(standardOutput(), containsString(expectedOutput));
+        assertThat(standardOutput()).contains(expectedOutput);
+
     }
 
     @Test
@@ -88,8 +89,10 @@ public class ContactsManagerMust {
         String standardOutput = standardOutput();
         String firstContactInfo = NICOLE_FERRONI_NAME + FIELD_SEPARATOR + NICOLE_FERRONI_EMAIL + FIELD_SEPARATOR + NICOLE_FERRONI_PHONE_NUMBER;
         String secondContactInfo = GUILLAUME_MEURICE_NAME + FIELD_SEPARATOR + GUILLAUME_MEURICE_EMAIL + FIELD_SEPARATOR + GUILLAUME_MEURICE_PHONE_NUMBER;
-        assertThat(standardOutput, containsString(firstContactInfo));
-        assertThat(standardOutput, containsString(secondContactInfo));
+        assertThat(standardOutput).contains(firstContactInfo);
+
+        assertThat(standardOutput).contains(secondContactInfo);
+
     }
 
     @Test
@@ -101,7 +104,7 @@ public class ContactsManagerMust {
         contactsManager.searchContactByName("meuri");
 
         String expectedOutput = GUILLAUME_MEURICE_NAME + FIELD_SEPARATOR + GUILLAUME_MEURICE_EMAIL + FIELD_SEPARATOR + GUILLAUME_MEURICE_PHONE_NUMBER;
-        assertThat(standardOutput(), is(expectedOutput + System.lineSeparator()));
+        assertThat(standardOutput()).isEqualTo(expectedOutput + System.lineSeparator());
     }
 
     private String standardOutput() {
