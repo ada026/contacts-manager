@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa.core.service;
+package com.fredericboisguerin.insa.contactsmanager.core.service;
 
 import org.junit.Test;
 

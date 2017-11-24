@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa.model;
+package com.fredericboisguerin.insa.contactsmanager.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

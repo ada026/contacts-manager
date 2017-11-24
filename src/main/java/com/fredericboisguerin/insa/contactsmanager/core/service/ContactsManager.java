@@ -1,10 +1,10 @@
-package com.fredericboisguerin.insa.core.service;
+package com.fredericboisguerin.insa.contactsmanager.core.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import com.fredericboisguerin.insa.model.Contact;
+import com.fredericboisguerin.insa.contactsmanager.model.Contact;
 
 public class ContactsManager {
 

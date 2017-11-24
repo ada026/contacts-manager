@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa.core.ui;
+package com.fredericboisguerin.insa.contactsmanager.core.ui;
 
 import java.util.Scanner;
 import java.util.StringJoiner;

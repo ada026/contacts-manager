@@ -1,10 +1,10 @@
-package com.fredericboisguerin.insa.core.ui;
+package com.fredericboisguerin.insa.contactsmanager.core.ui;
 
 import java.util.Scanner;
 
-import com.fredericboisguerin.insa.core.service.ContactsManager;
-import com.fredericboisguerin.insa.core.service.InvalidContactNameException;
-import com.fredericboisguerin.insa.core.service.InvalidEmailException;
+import com.fredericboisguerin.insa.contactsmanager.core.service.ContactsManager;
+import com.fredericboisguerin.insa.contactsmanager.core.service.InvalidEmailException;
+import com.fredericboisguerin.insa.contactsmanager.core.service.InvalidContactNameException;
 
 public class GeekUI {
     private final ContactsManager contactsManager;

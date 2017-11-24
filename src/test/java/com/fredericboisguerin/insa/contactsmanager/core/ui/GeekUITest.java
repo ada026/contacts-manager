@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa.core.ui;
+package com.fredericboisguerin.insa.contactsmanager.core.ui;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -8,7 +8,7 @@ import java.io.ByteArrayInputStream;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fredericboisguerin.insa.core.service.ContactsManager;
+import com.fredericboisguerin.insa.contactsmanager.core.service.ContactsManager;
 
 public class GeekUITest {
 

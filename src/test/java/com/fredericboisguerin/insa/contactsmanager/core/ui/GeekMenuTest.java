@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa.core.ui;
+package com.fredericboisguerin.insa.contactsmanager.core.ui;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
