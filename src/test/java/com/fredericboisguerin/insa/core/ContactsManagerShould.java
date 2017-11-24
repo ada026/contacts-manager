@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa;
+package com.fredericboisguerin.insa.core;
 
 import org.junit.Test;
 

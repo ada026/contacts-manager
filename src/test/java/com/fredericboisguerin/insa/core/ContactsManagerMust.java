@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa;
+package com.fredericboisguerin.insa.core;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;

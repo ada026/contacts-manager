@@ -1,8 +1,10 @@
-package com.fredericboisguerin.insa;
+package com.fredericboisguerin.insa.core;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+
+import com.fredericboisguerin.insa.model.Contact;
 
 public class ContactsManager {
 

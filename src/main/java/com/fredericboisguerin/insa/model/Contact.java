@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa;
+package com.fredericboisguerin.insa.model;
 
 public class Contact {
     private String name;
@@ -23,7 +23,7 @@ public class Contact {
         return phoneNumber;
     }
 
-    public boolean nameMatches(String otherName) {
-        return this.name.toLowerCase().contains(otherName);
+    public boolean nameMatches(String pattern) {
+        return this.name.toLowerCase().contains(pattern);
     }
 }
