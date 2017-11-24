@@ -18,11 +18,10 @@ public class GeekUITest {
     private static final String SOME_NAME = "some name";
 
     private GeekUI geekUI;
-    private ContactsManager contactsManager;
+    private ContactsManager contactsManager = mock(ContactsManager.class);
 
     @Before
     public void setUp() throws Exception {
-        contactsManager = mock(ContactsManager.class);
         geekUI = new GeekUI(contactsManager);
     }
 
