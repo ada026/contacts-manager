@@ -1,5 +1,6 @@
 package com.fredericboisguerin.insa.contactsmanager.core.service;
 
+import static java.lang.System.lineSeparator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
@@ -19,18 +20,20 @@ public class ContactsManagerMust {
     private static final String GUILLAUME_MEURICE_NAME = "Guillaume Meurice";
     private static final String GUILLAUME_MEURICE_EMAIL = "contact@guillaumemeurice.fr";
     private static final String GUILLAUME_MEURICE_PHONE_NUMBER = "0615389254";
+    public static final String LINE_SEPARATOR = lineSeparator();
 
     private ByteArrayOutputStream out;
+    private ContactsManager contactsManager;
 
     @Before
     public void setUp() {
         out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
+        contactsManager = new ContactsManager();
     }
 
     @Test
     public void list_one_contact_without_email_nor_phone_number() throws Exception {
-        ContactsManager contactsManager = new ContactsManager();
         String noEmail = null;
         String noPhoneNumber = null;
         contactsManager.addContact(NICOLE_FERRONI_NAME, noEmail, noPhoneNumber);
@@ -38,12 +41,10 @@ public class ContactsManagerMust {
         contactsManager.printAllContacts();
 
         assertThat(standardOutput()).contains(NICOLE_FERRONI_NAME);
-
     }
 
     @Test
     public void list_one_contact_without_email() throws Exception {
-        ContactsManager contactsManager = new ContactsManager();
         String noEmail = null;
         contactsManager.addContact(NICOLE_FERRONI_NAME, noEmail, NICOLE_FERRONI_PHONE_NUMBER);
 
@@ -55,7 +56,6 @@ public class ContactsManagerMust {
 
     @Test
     public void list_one_contact_without_phone_number() throws Exception {
-        ContactsManager contactsManager = new ContactsManager();
         String noPhoneNumber = null;
         contactsManager.addContact(NICOLE_FERRONI_NAME, NICOLE_FERRONI_EMAIL, noPhoneNumber);
 
@@ -63,24 +63,20 @@ public class ContactsManagerMust {
 
         String expectedOutput = NICOLE_FERRONI_NAME + FIELD_SEPARATOR + NICOLE_FERRONI_EMAIL;
         assertThat(standardOutput()).contains(expectedOutput);
-
     }
 
     @Test
     public void list_one_added_contact() throws Exception {
-        ContactsManager contactsManager = new ContactsManager();
         contactsManager.addContact(NICOLE_FERRONI_NAME, NICOLE_FERRONI_EMAIL, NICOLE_FERRONI_PHONE_NUMBER);
 
         contactsManager.printAllContacts();
 
         String expectedOutput = NICOLE_FERRONI_NAME + FIELD_SEPARATOR + NICOLE_FERRONI_EMAIL + FIELD_SEPARATOR + NICOLE_FERRONI_PHONE_NUMBER;
         assertThat(standardOutput()).contains(expectedOutput);
-
     }
 
     @Test
     public void list_two_added_contacts() throws Exception {
-        ContactsManager contactsManager = new ContactsManager();
         contactsManager.addContact(NICOLE_FERRONI_NAME, NICOLE_FERRONI_EMAIL, NICOLE_FERRONI_PHONE_NUMBER);
         contactsManager.addContact(GUILLAUME_MEURICE_NAME, GUILLAUME_MEURICE_EMAIL, GUILLAUME_MEURICE_PHONE_NUMBER);
 
@@ -92,19 +88,26 @@ public class ContactsManagerMust {
         assertThat(standardOutput).contains(firstContactInfo);
 
         assertThat(standardOutput).contains(secondContactInfo);
-
     }
 
     @Test
     public void retrieve_a_contact_from_its_name() throws Exception {
-        ContactsManager contactsManager = new ContactsManager();
         contactsManager.addContact(NICOLE_FERRONI_NAME, NICOLE_FERRONI_EMAIL, NICOLE_FERRONI_PHONE_NUMBER);
         contactsManager.addContact(GUILLAUME_MEURICE_NAME, GUILLAUME_MEURICE_EMAIL, GUILLAUME_MEURICE_PHONE_NUMBER);
 
         contactsManager.searchContactByName("meuri");
 
         String expectedOutput = GUILLAUME_MEURICE_NAME + FIELD_SEPARATOR + GUILLAUME_MEURICE_EMAIL + FIELD_SEPARATOR + GUILLAUME_MEURICE_PHONE_NUMBER;
-        assertThat(standardOutput()).isEqualTo(expectedOutput + System.lineSeparator());
+        assertThat(standardOutput()).isEqualTo(expectedOutput + LINE_SEPARATOR);
+    }
+
+    @Test
+    public void should_inform_when_no_contact_has_been_found() throws Exception {
+        String notExisting = "not existing";
+
+        contactsManager.searchContactByName(notExisting);
+
+        assertThat(standardOutput()).isEqualTo("No contact found with name : " + notExisting + LINE_SEPARATOR);
     }
 
     private String standardOutput() {

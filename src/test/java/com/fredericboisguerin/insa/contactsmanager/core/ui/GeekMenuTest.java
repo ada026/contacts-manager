@@ -15,11 +15,11 @@ import org.junit.Test;
 public class GeekMenuTest {
 
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String MENU_AS_STRING = new StringJoiner(LINE_SEPARATOR).add("Actions :")
+    private static final String MENU_AS_STRING = new StringJoiner(LINE_SEPARATOR).add("------- ACTIONS -------")
             .add("0: exit")
             .add("1: print all contacts")
             .add("2: search for a contact")
-            .add("3: add a contact")
+            .add("3: add a contact").add("> ")
             .toString();
     private static final int EXIT_CHOICE = 0;
 

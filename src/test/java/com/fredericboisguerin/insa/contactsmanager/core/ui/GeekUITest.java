@@ -1,14 +1,21 @@
 package com.fredericboisguerin.insa.contactsmanager.core.ui;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.fredericboisguerin.insa.contactsmanager.core.service.ContactsManager;
+import com.fredericboisguerin.insa.contactsmanager.core.service.InvalidContactNameException;
+import com.fredericboisguerin.insa.contactsmanager.core.service.InvalidEmailException;
 
 public class GeekUITest {
 
@@ -19,9 +26,12 @@ public class GeekUITest {
 
     private GeekUI geekUI;
     private ContactsManager contactsManager = mock(ContactsManager.class);
+    private ByteArrayOutputStream out;
 
     @Before
     public void setUp() throws Exception {
+        out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
         geekUI = new GeekUI(contactsManager);
     }
 
@@ -48,6 +58,30 @@ public class GeekUITest {
         geekUI.printAllContacts();
 
         verify(contactsManager).printAllContacts();
+    }
+
+    @Test
+    public void should_inform_that_name_is_incorrect_on_invalid_contact_name_exception() throws Exception {
+        setUserInput(SOME_NAME + LINE_SEPARATOR + SOME_EMAIL + LINE_SEPARATOR + SOME_PHONE_NUMBER + LINE_SEPARATOR);
+        doThrow(InvalidContactNameException.class).when(contactsManager).addContact(anyString(), anyString(), anyString());
+
+        geekUI.askForContactInformation();
+
+        assertThat(standardOutput()).contains("[ERROR] The name entered is not valid." + LINE_SEPARATOR);
+    }
+
+    @Test
+    public void should_inform_that_email_is_incorrect_on_invalid_contact_name_exception() throws Exception {
+        setUserInput(SOME_NAME + LINE_SEPARATOR + SOME_EMAIL + LINE_SEPARATOR + SOME_PHONE_NUMBER + LINE_SEPARATOR);
+        doThrow(InvalidEmailException.class).when(contactsManager).addContact(anyString(), anyString(), anyString());
+
+        geekUI.askForContactInformation();
+
+        assertThat(standardOutput()).contains("[ERROR] The email entered is not valid." + LINE_SEPARATOR);
+    }
+
+    private String standardOutput() {
+        return out.toString();
     }
 
     private void setUserInput(String input) {

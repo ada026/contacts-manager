@@ -3,6 +3,7 @@ package com.fredericboisguerin.insa.contactsmanager.core.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import com.fredericboisguerin.insa.contactsmanager.model.Contact;
 
@@ -27,7 +28,14 @@ public class ContactsManager {
     }
 
     public void searchContactByName(String name) {
-        contacts.stream().filter(contact -> contact.nameMatches(name)).forEach(this::print);
+        List<Contact> matchingContacts = contacts.stream()
+                .filter(contact -> contact.nameMatches(name))
+                .collect(Collectors.toList());
+        if (matchingContacts.size() > 0) {
+            matchingContacts.forEach(this::print);
+        } else {
+            System.out.println("No contact found with name : " + name);
+        }
     }
 
     private void print(Contact contact) {
