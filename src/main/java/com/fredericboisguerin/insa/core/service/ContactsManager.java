@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa.core;
+package com.fredericboisguerin.insa.core.service;
 
 import java.util.ArrayList;
 import java.util.List;

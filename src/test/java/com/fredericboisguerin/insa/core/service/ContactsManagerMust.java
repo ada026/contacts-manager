@@ -1,4 +1,4 @@
-package com.fredericboisguerin.insa.core;
+package com.fredericboisguerin.insa.core.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
